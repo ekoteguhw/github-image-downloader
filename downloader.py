@@ -1,9 +1,13 @@
 import requests
+import argparse
 
-url = 'https://avatars1.githubusercontent.com/u/835315?s=460&v=4'
-r = requests.get(url)
+ap = argparse.ArgumentParser()
+ap.add_argument('-l', '--link', required=True, help='Link file')
+args = vars(ap.parse_args())
 
-filename = url.split('/')[-1]
+r = requests.get(args['link'])
+
+filename = args['link'].split('/')[-1]
 new_filename = filename.split('?')[0] + '.jpg'
 
 f = open(new_filename, 'wb')
